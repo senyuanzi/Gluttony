@@ -52,21 +52,25 @@ In Application or the first Activity, initialize Gluttony.
 在Application或是首个Activity中，初始化Gluttony·饕餮。
 
 DataBaseConfig having three args:
-        databaseName
-        SQLiteDatabase.CursorFactory
+        databaseName,
+        SQLiteDatabase.CursorFactory,
         databaseVersion
 
 DataBaseConfig共有三个参数：
-        数据库名称
-        SQLiteDatabase.CursorFactory
+        数据库名称，
+        SQLiteDatabase.CursorFactory，
         数据库版本
 
 ### Entities · 实体
+Entities do not need to do any processing. 
 实体类无需做任何处理。
 
+Gluttony automatically for you to take care of everything. 
 Gluttony·饕餮 在数据库中自动为您打理好一切。
 
-另外提供了 注解：@PrimaryKey 用来指定主键。
+Annotation: @PrimaryKey is used to specify a PrimaryKey.
+
+注解：@PrimaryKey 用来指定主键。
 ```kotlin
 data class MyData(
     @PrimaryKey
