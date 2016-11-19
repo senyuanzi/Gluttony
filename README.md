@@ -44,11 +44,22 @@ as a gradle dependency
 ### Configuration · 配置
 
 ```kotlin
-    Gluttony.init(applicationContext, DataBaseConfig(name = "your database name",factory = null, version = 1))
+    var dataBaseConfig = DataBaseConfig(name = "your database name",factory = null, version = 1)
+    Gluttony.init(applicationContext, dataBaseConfig)
 ```
+In Application or the first Activity, initialize Gluttony. 
+
 在Application或是首个Activity中，初始化Gluttony·饕餮。
 
-DataBaseConfig可配置 数据库名称、SQLiteDatabase.CursorFactory、数据库版本。
+DataBaseConfig having three args:
+        databaseName
+        SQLiteDatabase.CursorFactory
+        databaseVersion
+
+DataBaseConfig共有三个参数：
+        数据库名称
+        SQLiteDatabase.CursorFactory
+        数据库版本
 
 ### Entities · 实体
 实体类无需做任何处理。
