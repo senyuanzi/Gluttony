@@ -24,6 +24,10 @@ Library is compatible with Kotlin 1.0.5-2 build.
         var johnData = MyData().findOneByKey(2)
 ```
 
+##### Welcome to staring the project, thanks!
+
+##### 欢迎关注本项目，O(∩_∩)O谢谢！
+
 ## Feature · 特性
 
 
