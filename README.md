@@ -44,7 +44,8 @@ as a gradle dependency
 ### Configuration · 配置
 
 ```kotlin
-    //configure databaseName,cursorFactory,databaseVersion · 配置 数据库名称，cursorFactory，数据库版本
+    //configure databaseName,cursorFactory,databaseVersion 
+    //配置 数据库名称，cursorFactory，数据库版本
     var dataBaseConfig = DataBaseConfig("databaseName",factory = null, 1)
     Gluttony.init(applicationContext, dataBaseConfig)
 ```
@@ -54,9 +55,11 @@ In Application or the first Activity, initialize Gluttony.
 
 ### Entities · 实体
 Entities do not need to do any processing. 
+
 实体类无需做任何处理。
 
 Gluttony automatically for you to take care of everything. 
+
 Gluttony·饕餮 在数据库中自动为您打理好一切。
 
 Annotation: @PrimaryKey is used to specify a PrimaryKey.
