@@ -36,7 +36,7 @@ as a gradle dependency
 ### Configuration · 配置
 
 ```kotlin
-        Gluttony.init(applicationContext, DataBaseConfig(name = "your database name",factory = null, version = 1))
+    Gluttony.init(applicationContext, DataBaseConfig(name = "your database name",factory = null, version = 1))
 ```
 在Application或是首个Activity中，初始化Gluttony·饕餮。
 
