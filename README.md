@@ -26,7 +26,7 @@ Library is compatible with Kotlin 1.0.5-2 build.
 
 ##### Welcome to staring the project, thanks!
 
-##### 欢迎关注本项目，O(∩_∩)O谢谢！
+##### 欢迎关注(star)本项目，O(∩_∩)O谢谢！
 
 ## Feature · 特性
 
