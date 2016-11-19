@@ -44,7 +44,7 @@ as a gradle dependency
 ### Configuration · 配置
 
 ```kotlin
-    var dataBaseConfig = DataBaseConfig(name = "your database name",factory = null, version = 1)
+    var dataBaseConfig = DataBaseConfig("databaseName",factory = null, 1)//configure databaseName,cursorFactory,databaseVersion · 配置 数据库名称，cursorFactory，数据库版本
     Gluttony.init(applicationContext, dataBaseConfig)
 ```
 In Application or the first Activity, initialize Gluttony. 
