@@ -69,22 +69,26 @@ Annotation: @PrimaryKey is used to specify a PrimaryKey.
 data class MyData(
     @PrimaryKey
     var id = -1
+    var name = ""
+    var age = -1
+    var isChildren = false
 )
 ```
 
 
 ### Save · 保存
-
+* 实体 直接调用 save
 ```kotlin
 var myData = MyData()
 myData.id = 666
 myData.name = "sen"
+myData.age = 23
 myData.isChildren = false
 myData.save()
 
 //or
 
-MyData(12,john,true).save()
+MyData(2,john,12,true).save()
 ```
 
 
