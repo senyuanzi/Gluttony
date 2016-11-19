@@ -3,7 +3,11 @@ Gluttony, a super convenient and simple library to using Android database
 
 饕餮，高效而简约地使用Android数据库
 
-# Overview · 预览
+Library is compatible with Kotlin 1.0.5-2 build.
+
+饕餮 兼容 kotlin 1.0.5-2 版本（最新版）
+
+## Overview · 预览
 ```kotlin
         //save data · 数据的保存
         MyData(2, "john", true, 13).save()
@@ -16,14 +20,14 @@ Gluttony, a super convenient and simple library to using Android database
             limit(3)
             orderBy("id", SqlOrderDirection.ASC)
         }
-        //when MyData setting primaryKey
+        //find the entity with primarykey · 通过 主键 寻找指定 实体
         var johnData = MyData().findOneByKey(2)
 ```
 
-# Feature · 特性
+## Feature · 特性
 
 
-# Install · 安装
+### Install · 安装
 as a gradle dependency
 
 作为一个gradle依赖库
@@ -31,7 +35,7 @@ as a gradle dependency
 ```groovy
     compile 'sen.yuan.dao:gluttony:1.0'
 ```
-# How to use · 如何使用
+## How to use · 如何使用
 
 ### Configuration · 配置
 
@@ -69,3 +73,6 @@ data class MyData(
 
 
 ### Delete · 删除
+
+
+### Bulk operating · 批量操作
