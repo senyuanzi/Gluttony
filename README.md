@@ -2,6 +2,21 @@
 Gluttony, a super convenient and simple library to using Android database
 饕餮，高效而简约地使用Android数据库
 
+# Overview · 预览
+```kotlin
+        //save data · 数据的保存
+        MyData(2, "john", true, 13).save()
+        //find data · 数据的查询
+        var dataList = MyData().findAll {
+            condition {
+                "age" between 11..27
+                "isChildren" Not false
+            }
+            limit(3)
+            orderBy("id", SqlOrderDirection.ASC)
+        }
+```
+
 # Feature · 特性
 
 
@@ -17,8 +32,23 @@ as a gradle dependency
 ### Configuration · 配置
 
 ```kotlin
-  Gluttony.init(this, DataBaseConfig())
+        Gluttony.init(applicationContext, DataBaseConfig(name = "your database name",factory = null, version = 1))
 ```
+在Application或是首个Activity中，初始化Gluttony·饕餮。
+DataBaseConfig可配置 数据库名称、SQLiteDatabase.CursorFactory、数据库版本。
+
+### Entities · 实体
+实体类无需做任何处理。
+Gluttony·饕餮 将自动处理一切：类名对应表名，字段名对应columns，等等。
+
+另外提供了注解：@PrimaryKey
+```kotlin
+data class MyData(
+    @PrimaryKey
+    var id = -1
+)
+```
+用来指定主键。
 
 ### Save · 保存
 
