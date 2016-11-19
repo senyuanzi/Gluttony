@@ -44,10 +44,9 @@ as a gradle dependency
 ### Configuration · 配置
 
 ```kotlin
-    //configure databaseName,cursorFactory,databaseVersion 
-    //配置 数据库名称，cursorFactory，数据库版本
-    var dataBaseConfig = DataBaseConfig("databaseName",factory = null, 1)
-    Gluttony.init(applicationContext, dataBaseConfig)
+        //configure databaseName,cursorFactory,databaseVersion 
+        //配置 数据库名称，cursorFactory，数据库版本
+        Gluttony.init(this, GluttonyConfig("gluttony_example",null,1))
 ```
 In Application or the first Activity, initialize Gluttony. 
 
@@ -66,33 +65,49 @@ Annotation: @PrimaryKey is used to specify a PrimaryKey.
 
 注解：@PrimaryKey 用来指定主键。
 ```kotlin
-data class MyData(
-    @PrimaryKey
-    var id = -1
-    var name = ""
-    var age = -1
-    var isChildren = false
+data class UserData(
+        @PrimaryKey
+        var id: Int = -1,
+        var name: String = "",
+        var age: Int = -1,
+        var isChildren: Boolean = false
 )
 ```
 
 
 ### Save · 保存
-* 实体 直接调用 save
+* 实体 直接调用 save()
 ```kotlin
-var myData = MyData()
-myData.id = 666
-myData.name = "sen"
-myData.age = 23
-myData.isChildren = false
-myData.save()
+        val user = UserData()
+        user.id = 666
+        user.name = "sen"
+        user.age = 23
+        user.isChildren = false
+        user.save()
 
-//or
+        //or
 
-MyData(2,john,12,true).save()
+        UserData(2, "john", 12, true).save()
+        UserData(7, "lucy", 8, true).save()
 ```
 
 
 ### Find · 查询
+* 根据 primary key 查询 实体
+```kotlin
+        val user1 = UserData().findOneByKey(666)
+        e { user1?.name ?: "no user witch id is 666" } // "sen"
+```
+
+* 查询符合条件的 第一个 实体
+```kotlin
+var user = UserData().findOne {
+        
+}
+```
+
+* 查询符合条件的 所有 实体，以列表的形式返回
+
 
 
 
