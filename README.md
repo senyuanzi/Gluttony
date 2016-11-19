@@ -43,16 +43,16 @@ DataBaseConfig可配置 数据库名称、SQLiteDatabase.CursorFactory、数据�
 ### Entities · 实体
 实体类无需做任何处理。
 
-Gluttony·饕餮 将自动处理一切：类名对应表名，字段名对应columns，等等。
+Gluttony·饕餮 在数据库中自动为您打理好一切。
 
-另外提供了注解：@PrimaryKey
+另外提供了 注解：@PrimaryKey 用来指定主键。
 ```kotlin
 data class MyData(
     @PrimaryKey
     var id = -1
 )
 ```
-用来指定主键。
+
 
 ### Save · 保存
 
