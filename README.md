@@ -1,5 +1,6 @@
 # Gluttony · 饕餮
 Gluttony, a super convenient and simple library to using Android database
+
 饕餮，高效而简约地使用Android数据库
 
 # Overview · 预览
@@ -22,6 +23,7 @@ Gluttony, a super convenient and simple library to using Android database
 
 # Install · 安装
 as a gradle dependency
+
 作为一个gradle依赖库
 
 ```groovy
@@ -35,10 +37,12 @@ as a gradle dependency
         Gluttony.init(applicationContext, DataBaseConfig(name = "your database name",factory = null, version = 1))
 ```
 在Application或是首个Activity中，初始化Gluttony·饕餮。
+
 DataBaseConfig可配置 数据库名称、SQLiteDatabase.CursorFactory、数据库版本。
 
 ### Entities · 实体
 实体类无需做任何处理。
+
 Gluttony·饕餮 将自动处理一切：类名对应表名，字段名对应columns，等等。
 
 另外提供了注解：@PrimaryKey
