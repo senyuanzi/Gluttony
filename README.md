@@ -16,6 +16,8 @@ Gluttony, a super convenient and simple library to using Android database
             limit(3)
             orderBy("id", SqlOrderDirection.ASC)
         }
+        //when MyData setting primaryKey
+        var johnData = MyData().findOneByKey(2)
 ```
 
 # Feature · 特性
