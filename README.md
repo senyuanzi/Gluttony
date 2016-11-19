@@ -75,6 +75,17 @@ data class MyData(
 
 ### Save · 保存
 
+```kotlin
+var myData = MyData()
+myData.id = 666
+myData.name = "sen"
+myData.isChildren = false
+myData.save()
+
+//or
+
+MyData(12,john,true).save()
+```
 
 
 ### Find · 查询
