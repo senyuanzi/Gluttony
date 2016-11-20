@@ -87,8 +87,8 @@ data class UserData(
 ```
 
 
-### Save · 保存
-* 实体 直接调用 save()
+## Save · 保存
+### Save Entity directly · 直接保存实体
 ```kotlin
         val user = UserData()
         user.id = 666
@@ -98,21 +98,17 @@ data class UserData(
         user.save()
 
         //or
-
         UserData(2, "john", 12, true).save()
-        UserData(7, "lucy", 8, true).save()
-        UserData(4, "su", 80, false).save()
 ```
 
 
-### Find · 查询
-* 根据 primary key 查询 实体
+## Find · 查询
+### Find Entity based on PrimaryKey · 根据primary key 查询数据
 ```kotlin
         val user1 = UserData().findOneByKey(666)
-        e { user1?.name ?: "no user witch id is 666" } // "sen"
 ```
 
-* 查询符合条件的 第一个 实体
+### Find the first Entity based on Condition · 根据条件 查询第一个数据
 ```kotlin
         val user2 = UserData().findOne {
             condition {
@@ -121,102 +117,82 @@ data class UserData(
             }
             orderBy("age", SqlOrderDirection.ASC)
         }
-        e { user2?.name ?: "no user witch age is between 7..16 and isChild is not false" } // "lucy"
 ```
 
-* 查询符合条件的 所有 实体，以列表的形式返回
+### Find all Entities based on Condition · 根据条件 查询所有数据，返回值为一个列表
 ```kotlin
         val userList = UserData().findAll {
             condition {
                 "age" moreThan 11
             }
         }
-        e { userList.size.toString() } // 3
 ```
 
-### Update · 更新
+## Update · 更新
 
-* 实体 直接调用 update()，通过 primary key 定位
+### Update Entity directly base on PrimaryKey · 根据primary key 直接更新实体
 ```kotlin
-var user3 = UserData().findOne { condition { "name" equalsData "lucy" } }!!
+	var user3 = UserData().findOne { condition { "name" equalsData "lucy" } }!!
         user3.age += 1
         user3.update()
-        user3 = UserData().findOne { condition { "name" equalsData "lucy" } }!!
-        e { user3.age.toString() } // 9
         
         //or
         
-        var user4 = UserData(7, "lucy", 10, true)//user4.id == user3.id · 注意primary key相同
-        user4.update()//user4 will overwrite the old data · 将会覆盖掉旧数据
-        user4 = UserData().findOneByKey(7)!!
-        e { user4.age.toString() } // 10
+        var user4 = UserData(7, "lucy", 10, true)	//user4.id == user3.id · 注意primary key相同
+        user4.update()	//user4 will overwrite the old data · 将会覆盖掉旧数据
 ```
 
-* updateOrSave() 在数据不存在的情况下，会新建数据
+### Update Entity directly or Save Entity when it doesn't exist · 直接 更新或保存实体 （如果实体是未保存过的话）
 ```kotlin
-        var user5 = UserData(90, "white", 77, false)// 90 is a new primary key
-*        user5.updateOrSave()// Gluttony will save a new data
-        user5 = UserData().findOneByKey(90)!!
-        e { user5.name } // "white"
+        var user5 = UserData(90, "white", 77, false)	// 90 is a new primary key
+        user5.updateOrSave()	// Gluttony will save a new data
 ```
 
-* 通过primary key来更新数据，提供两种语法
+### Update Entity based on PrimaryKey · 根据primary key 更新实体
 ```kotlin
+	//update user who id is 90 to named black,age 80
+	//lambda
         UserData().updateByKey(90) { arrayOf("name" to "black", "age" to 80) }
-        val user6 = UserData().findOneByKey(90)!!
-        e { user6.name + ":" + user6.age } //white:77->black:80
 
-        //or
-
+        //or pairs
         UserData().updateByKey(90, "name" to "green", "age" to 82)
-        val user7 = UserData().findOneByKey(90)!!
-        e { user7.name + ":" + user7.age } //black:80->green:82
 ```
 
-* 更新符合条件的所有 数据
+### Update all Entities based on Condition · 根据条件 更新所有实体
 ```kotlin
+	//update user who name is green to name red,age 99
         UserData().update("name" to "red", "age" to 99) {
             condition {
                 "name" equalsData "green"
             }
         }
-        val user8 = UserData().findOneByKey(90)!!
-        e { user8.name + ":" + user8.age } //green:82->red:99
 ```
 
-### Delete · 删除
+## Delete · 删除
 
-* 实体 直接调用 delete()
+### Delete Entity directly · 直接删除实体
 ```kotlin
-        var user9: UserData?
-        user9 = UserData(90)//only need primary key
+        var user9 = UserData(90)	//only need primary key
         user9.delete()
-        user9 = UserData().findOneByKey(90)
-        e { user9?.name ?: "no user" }//no user
 ```
 
 
-* #### Delete Entity based on PrimaryKey · 基于primary key 删除指定数据
+### Delete Entity based on PrimaryKey · 根据primary key 删除实体
 ```kotlin
-        UserData().deleteByKey(666)//delete sen
-        val user10 = UserData().findOneByKey(666)
-        e { user10?.name ?: "no user" }//no user
+        UserData().deleteByKey(666)	//delete user which id is 666
 ```
 
-* 删除符合条件的所有 数据
+### Delete all Entities based on Condition · 根据条件 删除所有实体
 ```kotlin
+	//delete users who is child
         UserData().delete {
             condition {
                 "isChild" equalsData true
             }
-        }//john and lucy will be deleted
-        val children = UserData().findAll { condition { "isChild" equalsData true } }
-        e { children.size.toString() }//0
+        }
 ```
 
-* 清空该类所有数据
+### Clear one Class's entities · 清空一个类的所有实体
 ```kotlin
-        e { UserData().findAll { }.size.toString() }//1
         UserData().clear()
-        e { UserData().findAll { }.size.toString() }//0
 ```
