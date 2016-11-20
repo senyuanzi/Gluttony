@@ -33,7 +33,7 @@ Library is compatible with Kotlin 1.0.5-2 build.
 ## Content · 目录
 
 * [Install · 安装](#Install--安装)
-* [How to use · 如何使用](#How-to-use--如何使用)
+* [How to use · 如何使用](#how-to-use--如何使用)
         * [Configuration · 配置](#Configuration--配置)
         * [Entities · 实体](#Entities--实体)
  
