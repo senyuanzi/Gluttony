@@ -179,20 +179,30 @@ data class UserData(
 ```
 
 ## Condition · 条件
+
 * equalsData · 等于
+
 * moreThan · 大于
+
 * moreThanOrEquals · 大于等于
+
 * lessThan · 小于
+
 * lessThanOrEquals · 小于等于
+
 * Not · 非
+
 * In:		Determine whether in the array · 判断是否在数组中 
+
 * notIn:	Determine whether not in the array
+
 * between:	Determine whether in the range
+
 * like:		fuzzy query · 模糊查询
 
 ```
 
-two marks: % and _ · 来个通配符：% 和 _
+two marks: % and _ · 两个通配符：% 和 _
 
 % : indefinite amount content · 不定数量的内容
 
