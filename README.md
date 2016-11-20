@@ -23,7 +23,8 @@ Library is compatible with Kotlin 1.0.5-2 build.
 * 实体类无需任何处理
 ```
 ```
-* The future will provide two kinds of the kernel for your choice, 【sqlite】 and 【realm】, the performance of the pursuit of perfection
+* The future will provide two kinds of the kernel for your choice, 
+  【sqlite】 and 【realm】, the performance of the pursuit of perfection
 * 未来将会提供两种内核供您选择，【sqlite】以及【realm】，追求极致的性能
 ```
 
