@@ -181,20 +181,18 @@ data class UserData(
 ```
 
 ## Condition · 条件
-* equalsData
-* moreThan
-* moreThanOrEquals
-* lessThan
-* lessThanOrEquals
-* Not
-* In:		Determine whether in the array 
+* equalsData · 等于
+* moreThan · 大于
+* moreThanOrEquals · 大于等于
+* lessThan · 小于
+* lessThanOrEquals · 小于等于
+* Not · 非
+* In:		Determine whether in the array · 判断是否在数组中 
 * notIn:	Determine whether not in the array
 * between:	Determine whether in the range
-* like:		fuzzy query
-	two marks: % and _
-	% : indefinite amount content
-	_ : one amount content
-	for example:	"gluttony%" -> find values witch is starting with "gluttony"
-	
-	
-	
+* like:		fuzzy query · 模糊查询
+two marks: % and _ · 来个通配符：% 和 _
+% : indefinite amount content · 不定数量的内容
+_ : one amount content · 一个位置的内容
+for example:	"gluttony%" -> find values witch is starting with "gluttony"
+例如，"gluttony%" -> 查询所有以"gluttony"开头的数据
