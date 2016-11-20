@@ -106,7 +106,7 @@ data class UserData(
         val userList = UserData().findAll {
             condition {
                 "age" moreThan 11
-		"name" like "s%"	//find names witch is starting with "s"
+                "name" like "s%"	//find names witch is starting with "s"
             }
         }
 ```
