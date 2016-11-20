@@ -7,9 +7,7 @@ Library is compatible with Kotlin 1.0.5-2 build.
 
 饕餮 兼容 kotlin 1.0.5-2 版本（最新版）
 
-##### Welcome to staring the project, thanks!
 
-##### 欢迎关注(star)本项目，O(∩_∩)O谢谢！
 
 ## Feature · 特性
 
@@ -191,8 +189,18 @@ data class UserData(
 * notIn:	Determine whether not in the array
 * between:	Determine whether in the range
 * like:		fuzzy query · 模糊查询
+
 two marks: % and _ · 来个通配符：% 和 _
+
 % : indefinite amount content · 不定数量的内容
+
 _ : one amount content · 一个位置的内容
+
 for example:	"gluttony%" -> find values witch is starting with "gluttony"
+
 例如，"gluttony%" -> 查询所有以"gluttony"开头的数据
+
+
+##### Welcome to staring the project, thanks!
+
+##### 欢迎关注(star)本项目，O(∩_∩)O谢谢！
