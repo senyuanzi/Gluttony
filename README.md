@@ -30,6 +30,9 @@ Library is compatible with Kotlin 1.0.5-2 build.
 
 ## Feature · 特性
 
+## Content · 目录
+
+[Install · 安装](#Install · 安装)
 
 ### Install · 安装
 as a gradle dependency
