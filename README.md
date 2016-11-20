@@ -8,6 +8,19 @@ Library is compatible with Kotlin 1.0.5-2 build.
 饕餮 兼容 kotlin 1.0.5-2 版本（最新版）
 
 
+## Content · 目录
+
+* [Feature · 特性](#feature--特性)
+* [Install · 安装](#install--安装)
+* [How to use · 如何使用](#how-to-use--如何使用)
+	* [Configuration · 配置](#configuration--配置)
+	* [Entities · 实体](#entities--实体)
+	* [Save · 保存](#save--保存)
+	* [Find · 查询](#find--查询)
+	* [Update · 更新](#update--更新)
+	* [Delete · 删除](#delete--删除)
+	* [Condition · 条件](#condition--条件)
+ 
 
 ## Feature · 特性
 ```
@@ -28,18 +41,6 @@ Library is compatible with Kotlin 1.0.5-2 build.
 * 未来将会提供两种内核供您选择，【sqlite】以及【realm】，追求极致的性能
 ```
 
-## Content · 目录
-
-* [Install · 安装](#install--安装)
-* [How to use · 如何使用](#how-to-use--如何使用)
-	* [Configuration · 配置](#configuration--配置)
-	* [Entities · 实体](#entities--实体)
-	* [Save · 保存](#save--保存)
-	* [Find · 查询](#find--查询)
-	* [Update · 更新](#update--更新)
-	* [Delete · 删除](#delete--删除)
-	* [Condition · 条件](#condition--条件)
- 
 
 ## Install · 安装
 as a gradle dependency
