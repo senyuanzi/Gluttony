@@ -32,10 +32,10 @@ Library is compatible with Kotlin 1.0.5-2 build.
 
 ## Content · 目录
 
-* [Install · 安装](#Install--安装)
+* [Install · 安装](#install--安装)
 * [How to use · 如何使用](#how-to-use--如何使用)
-        * [Configuration · 配置](#Configuration--配置)
-        * [Entities · 实体](#Entities--实体)
+	* [Configuration · 配置](#configuration--配置)
+	* [Entities · 实体](#entities--实体)
  
 
 ## Install · 安装
