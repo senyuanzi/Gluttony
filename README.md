@@ -56,6 +56,7 @@ Gluttony·饕餮 在数据库中自动为您打理好一切。
 
 Annotation: @PrimaryKey is used to specify a PrimaryKey.
 
+
 注解：@PrimaryKey 用来指定主键。
 ```kotlin
 data class UserData(
@@ -105,6 +106,7 @@ data class UserData(
         val userList = UserData().findAll {
             condition {
                 "age" moreThan 11
+		"name" like "s%"	//find names witch is starting with "s"
             }
         }
 ```
