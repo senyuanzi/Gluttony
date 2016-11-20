@@ -155,7 +155,7 @@ var user3 = UserData().findOne { condition { "name" equalsData "lucy" } }!!
 * updateOrSave() 在数据不存在的情况下，会新建数据
 ```kotlin
         var user5 = UserData(90, "white", 77, false)// 90 is a new primary key
-        user5.updateOrSave()// Gluttony will save a new data
+*        user5.updateOrSave()// Gluttony will save a new data
         user5 = UserData().findOneByKey(90)!!
         e { user5.name } // "white"
 ```
@@ -196,7 +196,7 @@ var user3 = UserData().findOne { condition { "name" equalsData "lucy" } }!!
 ```
 
 
-* deleteByKey(key:Any): Delete Entity based on PrimaryKey · 基于primary key 删除指定数据
+* deleteByKey(key:Any): Delete Entity based on PrimaryKey · 基于primary key 删除指定数据  *
 ```kotlin
         UserData().deleteByKey(666)//delete sen
         val user10 = UserData().findOneByKey(666)
