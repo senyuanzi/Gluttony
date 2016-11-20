@@ -190,6 +190,8 @@ data class UserData(
 * between:	Determine whether in the range
 * like:		fuzzy query · 模糊查询
 
+```
+
 two marks: % and _ · 来个通配符：% 和 _
 
 % : indefinite amount content · 不定数量的内容
@@ -200,6 +202,7 @@ for example:	"gluttony%" -> find values witch is starting with "gluttony"
 
 例如，"gluttony%" -> 查询所有以"gluttony"开头的数据
 
+```
 
 ##### Welcome to staring the project, thanks!
 
