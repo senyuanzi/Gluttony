@@ -10,14 +10,22 @@ Library is compatible with Kotlin 1.0.5-2 build.
 
 
 ## Feature · 特性
+```
 * The core concept, friendly to human, Gluttony will give you the perfect experience
 * 核心理念，对人类友好,Gluttony将会给您完美的使用体验
+```
+```
 * Automatic table and column naming through reflection
 * 通过反射自动建表
+```
+```
 * Entities do not need any processing
 * 实体类无需任何处理
+```
+```
 * The future will provide two kinds of the kernel for your choice, 【sqlite】 and 【realm】, the performance of the pursuit of perfection
 * 未来将会提供两种内核供您选择，【sqlite】以及【realm】，追求极致的性能
+```
 
 ## Content · 目录
 
