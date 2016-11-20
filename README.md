@@ -196,7 +196,7 @@ var user3 = UserData().findOne { condition { "name" equalsData "lucy" } }!!
 ```
 
 
-* deleteByKey(key:Any): Delete Entity based on PrimaryKey · 基于primary key 删除指定数据  *
+#### Delete Entity based on PrimaryKey · 基于primary key 删除指定数据
 ```kotlin
         UserData().deleteByKey(666)//delete sen
         val user10 = UserData().findOneByKey(666)
