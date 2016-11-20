@@ -1,5 +1,6 @@
 # Gluttony · 饕餮
 Gluttony, a super convenient and simple library to using Android database
+
 饕餮，高效而简约地使用Android数据库
 
 Library is compatible with Kotlin 1.0.5-2 build.
@@ -35,6 +36,11 @@ Library is compatible with Kotlin 1.0.5-2 build.
 * [How to use · 如何使用](#how-to-use--如何使用)
 	* [Configuration · 配置](#configuration--配置)
 	* [Entities · 实体](#entities--实体)
+	* [Save · 保存](#save--保存)
+	* [Find · 查询](#find--查询)
+	* [Update · 更新](#update--更新)
+	* [Delete · 删除](#delete--删除)
+	
  
 
 ## Install · 安装
@@ -189,7 +195,8 @@ var user3 = UserData().findOne { condition { "name" equalsData "lucy" } }!!
         e { user9?.name ?: "no user" }//no user
 ```
 
-* 根据primary key 删除指定数据
+
+* deleteByKey(key:Any): Delete Entity based on PrimaryKey · 基于primary key 删除指定数据
 ```kotlin
         UserData().deleteByKey(666)//delete sen
         val user10 = UserData().findOneByKey(666)
