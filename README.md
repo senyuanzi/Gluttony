@@ -7,23 +7,6 @@ Library is compatible with Kotlin 1.0.5-2 build.
 
 饕餮 兼容 kotlin 1.0.5-2 版本（最新版）
 
-## Overview · 预览
-```kotlin
-        //save data · 数据的保存
-        MyData(2, "john", true, 13).save()
-        //find data · 数据的查询
-        var dataList = MyData().findAll {
-            condition {
-                "age" between 11..27
-                "isChildren" Not false
-            }
-            limit(3)
-            orderBy("id", SqlOrderDirection.ASC)
-        }
-        //find the entity with primarykey · 通过 主键 寻找指定 实体
-        var johnData = MyData().findOneByKey(2)
-```
-
 ##### Welcome to staring the project, thanks!
 
 ##### 欢迎关注(star)本项目，O(∩_∩)O谢谢！
@@ -40,7 +23,7 @@ Library is compatible with Kotlin 1.0.5-2 build.
 	* [Find · 查询](#find--查询)
 	* [Update · 更新](#update--更新)
 	* [Delete · 删除](#delete--删除)
-	
+	* [Condition · 条件](#condition--条件)
  
 
 ## Install · 安装
@@ -196,3 +179,22 @@ data class UserData(
 ```kotlin
         UserData().clear()
 ```
+
+## Condition · 条件
+* equalsData
+* moreThan
+* moreThanOrEquals
+* lessThan
+* lessThanOrEquals
+* Not
+* In:		Determine whether in the array 
+* notIn:	Determine whether not in the array
+* between:	Determine whether in the range
+* like:		fuzzy query
+	two marks: % and _
+	% : indefinite amount content
+	_ : one amount content
+	for example:	"gluttony%" -> find values witch is starting with "gluttony"
+	
+	
+	
