@@ -50,7 +50,7 @@ as a gradle dependency
 作为一个gradle依赖库
 
 ```groovy
-    compile 'sen.yuan.dao:gluttony:1.0'
+    compile 'sen.yuan.dao:gluttony:1.1'
 ```
 ## How to use · 如何使用
 
