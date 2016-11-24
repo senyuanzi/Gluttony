@@ -1,10 +1,11 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'realm-android'
 
 ext {
     PUBLISH_GROUP_ID = 'sen.yuan.dao'
     PUBLISH_ARTIFACT_ID = 'gluttony'
-    PUBLISH_VERSION = '1.0'
+    PUBLISH_VERSION = '1.1'
 }
 
 android {
@@ -53,6 +54,7 @@ buildscript {
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "io.realm:realm-gradle-plugin:2.2.0"
     }
 }
 repositories {
