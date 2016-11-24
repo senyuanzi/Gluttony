@@ -1,3 +1,5 @@
+[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
+
 # Gluttony · 饕餮
 Gluttony, a super convenient and simple library to using Android database
 
@@ -48,7 +50,7 @@ as a gradle dependency
 作为一个gradle依赖库
 
 ```groovy
-    compile 'sen.yuan.dao:gluttony:1.0'
+    compile 'sen.yuan.dao:gluttony:1.1'
 ```
 ## How to use · 如何使用
 
@@ -237,3 +239,5 @@ for example:	"gluttony%" -> find values witch is starting with "gluttony"
 ##### Welcome to staring the project, thanks!
 
 ##### 欢迎关注(star)本项目，O(∩_∩)O谢谢！
+
+# QQ群：176275050
