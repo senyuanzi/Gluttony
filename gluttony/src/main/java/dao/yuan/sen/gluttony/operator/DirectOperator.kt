@@ -39,14 +39,7 @@ inline fun <T : Any> SQLiteDatabase.testCreateTable(data: T) {
     this.createTable(name, true, *tablePairs)
 }
 
-inline fun SQLiteDatabase.tryDo(functor: SQLiteDatabase.() -> Any?): Any? {
-    return try {
-        functor()
-    } catch (ex: SQLiteException) {
-        if (ex.message?.contains("no such table") ?: false) "no such table"
-        else throw ex
-    }
-}
+
 
 
 fun <T : Any> T.save(): Long {

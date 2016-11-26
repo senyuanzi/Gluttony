@@ -20,7 +20,7 @@ Library is compatible with Kotlin 1.0.5-2 build.
 	* [Save · 保存](#save--保存)
 	* [Find · 查询](#find--查询)
 	* [Update · 更新](#update--更新)
-	* [Delete · 删除](#delete--删除)
+	* [Delete · 删除](#deleteAll--删除)
 	* [Condition · 条件](#condition--条件)
  
 
@@ -176,19 +176,19 @@ data class UserData(
 ### Delete Entity directly · 直接删除实体
 ```kotlin
         var user9 = UserData(90)	//only need primary key
-        user9.delete()
+        user9.deleteAll()
 ```
 
 
 ### Delete Entity based on PrimaryKey · 根据primary key 删除实体
 ```kotlin
-        UserData().deleteByKey(666)	//delete user which id is 666
+        UserData().deleteByKey(666)	//deleteAll user which id is 666
 ```
 
 ### Delete all Entities based on Condition · 根据条件 删除所有实体
 ```kotlin
-	//delete users who is child
-        UserData().delete {
+	//deleteAll users who is child
+        UserData().deleteAll {
             condition {
                 "isChild" equalsData true
             }

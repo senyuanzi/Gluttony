@@ -1,6 +1,5 @@
 package dao.yuan.sen.gluttony.realm_module
 
-import io.realm.RealmObject
 import io.realm.RealmQuery
 import java.util.*
 
@@ -11,311 +10,365 @@ import java.util.*
 
 class RealmCondition() {
 
+    var functorArray: MutableList<RealmQuery<*>.() -> Unit> = mutableListOf()
 
-    infix fun String.between(range: IntRange): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.between(range: IntRange): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.between(this@between, range.first, range.last)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.between(range: LongRange): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.between(range: LongRange): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.between(this@between, range.first, range.last)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.greaterThan(value: Int): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.greaterThan(value: Int): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.greaterThan(this@greaterThan, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.greaterThan(value: Double): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.greaterThan(value: Double): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.greaterThan(this@greaterThan, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.greaterThan(value: Float): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.greaterThan(value: Float): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.greaterThan(this@greaterThan, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.greaterThan(value: Long): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.greaterThan(value: Long): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.greaterThan(this@greaterThan, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.greaterThan(value: Date): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.greaterThan(value: Date): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.greaterThan(this@greaterThan, value)
-        }
+        })
+        return this@RealmCondition
     }
 
 
-    infix fun String.greaterThanOrEqualTo(value: Int): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.greaterThanOrEqualTo(value: Int): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.greaterThanOrEqualTo(this@greaterThanOrEqualTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.greaterThanOrEqualTo(value: Double): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.greaterThanOrEqualTo(value: Double): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.greaterThanOrEqualTo(this@greaterThanOrEqualTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.greaterThanOrEqualTo(value: Float): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.greaterThanOrEqualTo(value: Float): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.greaterThanOrEqualTo(this@greaterThanOrEqualTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.greaterThanOrEqualTo(value: Long): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.greaterThanOrEqualTo(value: Long): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.greaterThanOrEqualTo(this@greaterThanOrEqualTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.greaterThanOrEqualTo(value: Date): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.greaterThanOrEqualTo(value: Date): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.greaterThanOrEqualTo(this@greaterThanOrEqualTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
 
-    infix fun String.lessThan(value: Int): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.lessThan(value: Int): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.lessThan(this@lessThan, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.lessThan(value: Double): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.lessThan(value: Double): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.lessThan(this@lessThan, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.lessThan(value: Float): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.lessThan(value: Float): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.lessThan(this@lessThan, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.lessThan(value: Long): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.lessThan(value: Long): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.lessThan(this@lessThan, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.lessThan(value: Date): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.lessThan(value: Date): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.lessThan(this@lessThan, value)
-        }
+        })
+        return this@RealmCondition
     }
 
 
-    infix fun String.lessThanOrEqualTo(value: Int): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.lessThanOrEqualTo(value: Int): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.lessThanOrEqualTo(this@lessThanOrEqualTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.lessThanOrEqualTo(value: Double): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.lessThanOrEqualTo(value: Double): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.lessThanOrEqualTo(this@lessThanOrEqualTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.lessThanOrEqualTo(value: Float): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.lessThanOrEqualTo(value: Float): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.lessThanOrEqualTo(this@lessThanOrEqualTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.lessThanOrEqualTo(value: Long): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.lessThanOrEqualTo(value: Long): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.lessThanOrEqualTo(this@lessThanOrEqualTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.lessThanOrEqualTo(value: Date): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.lessThanOrEqualTo(value: Date): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.lessThanOrEqualTo(this@lessThanOrEqualTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
 
-    infix fun String.equalTo(value: Date): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.equalTo(value: Date): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.equalTo(this@equalTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.equalTo(value: Int): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.equalTo(value: Int): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.equalTo(this@equalTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.equalTo(value: Long): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.equalTo(value: Long): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.equalTo(this@equalTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.equalTo(value: Short): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.equalTo(value: Short): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.equalTo(this@equalTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
 
-    infix fun String.equalTo(value: Float): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.equalTo(value: Float): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.equalTo(this@equalTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.equalTo(value: Double): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.equalTo(value: Double): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.equalTo(this@equalTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
 
-    infix fun String.equalTo(value: String): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.equalTo(value: String): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.equalTo(this@equalTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.equalTo(value: Byte): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.equalTo(value: Byte): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.equalTo(this@equalTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
 
-    infix fun String.equalTo(value: ByteArray): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.equalTo(value: ByteArray): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.equalTo(this@equalTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.equalTo(value: Boolean): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.equalTo(value: Boolean): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.equalTo(this@equalTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
 
-    infix fun String.notEqualTo(value: Date): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.notEqualTo(value: Date): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.notEqualTo(this@notEqualTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.notEqualTo(value: Int): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.notEqualTo(value: Int): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.notEqualTo(this@notEqualTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.notEqualTo(value: Long): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.notEqualTo(value: Long): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.notEqualTo(this@notEqualTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.notEqualTo(value: Short): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.notEqualTo(value: Short): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.notEqualTo(this@notEqualTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
 
-    infix fun String.notEqualTo(value: Float): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.notEqualTo(value: Float): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.notEqualTo(this@notEqualTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.notEqualTo(value: Double): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.notEqualTo(value: Double): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.notEqualTo(this@notEqualTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
 
-    infix fun String.notEqualTo(value: String): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.notEqualTo(value: String): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.notEqualTo(this@notEqualTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.notEqualTo(value: Byte): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.notEqualTo(value: Byte): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.notEqualTo(this@notEqualTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
 
-    infix fun String.notEqualTo(value: ByteArray): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.notEqualTo(value: ByteArray): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.notEqualTo(this@notEqualTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.notEqualTo(value: Boolean): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.notEqualTo(value: Boolean): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.notEqualTo(this@notEqualTo, value)
-        }
+        })
+        return this@RealmCondition
     }
 
 
-    infix fun String.contains(value: String): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.contains(value: String): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.contains(this@contains, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.beginsWith(value: String): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.beginsWith(value: String): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.beginsWith(this@beginsWith, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    infix fun String.endsWith(value: String): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    infix fun String.endsWith(value: String): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.endsWith(this@endsWith, value)
-        }
+        })
+        return this@RealmCondition
     }
 
-    fun String.isNull(): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    fun String.isNull(): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.isNull(this@isNull)
-        }
+        })
+        return this@RealmCondition
+
     }
 
-    fun String.isNotNull(): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    fun String.isNotNull(): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.isNotNull(this@isNotNull)
-        }
+        })
+        return this@RealmCondition
+
     }
 
-    fun String.isEmpty(): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    fun String.isEmpty(): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.isEmpty(this@isEmpty)
-        }
+        })
+        return this@RealmCondition
+
     }
 
 
-    fun String.isNotEmpty(): RealmQuery<*>.() -> Unit {
-        return fun RealmQuery<*>.() {
+    fun String.isNotEmpty(): RealmCondition {
+        functorArray.add(fun RealmQuery<*>.() {
             this.isNotEmpty(this@isNotEmpty)
-        }
+        })
+        return this@RealmCondition
+
     }
 }

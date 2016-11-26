@@ -8,8 +8,8 @@ import io.realm.RealmObject
  */
 
 
-inline fun RealmObject.save() {
+inline fun <T : RealmObject> T.realm_save() {
     Gluttony.realm.executeTransaction {
-        it.copyToRealm(this@save)
+        it.copyToRealm(this@realm_save)
     }
 }

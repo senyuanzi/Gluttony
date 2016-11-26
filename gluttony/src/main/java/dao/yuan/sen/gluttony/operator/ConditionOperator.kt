@@ -5,6 +5,7 @@ import dao.yuan.sen.gluttony.Condition
 import dao.yuan.sen.gluttony.Gluttony
 import dao.yuan.sen.gluttony.e
 import dao.yuan.sen.gluttony.parser.classParser
+import io.realm.RealmObject
 import org.jetbrains.anko.db.*
 
 /**
@@ -13,6 +14,7 @@ import org.jetbrains.anko.db.*
 
 
 inline fun <reified T : Any> T.columns(vararg fields: String, crossinline functor: SelectQueryBuilder.() -> Unit): List<Map<String, Any?>> {
+
     val name = "${this.javaClass.kotlin.simpleName}"
     return Gluttony.database.use {
         tryDo {
@@ -93,7 +95,7 @@ inline fun <reified T : Any> T.update(vararg pairs: Pair<String, Any>, crossinli
 }
 
 /**返回值：删除的数量*/
-inline fun <reified T : Any> T.delete(crossinline condition: () -> Condition): Int {
+inline fun <reified T : Any> T.deleteAll(crossinline condition: () -> Condition): Int {
     val name = "${this.javaClass.kotlin.simpleName}"
     return Gluttony.database.use {
         tryDo {

@@ -2,8 +2,10 @@ package dao.yuan.sen.gluttony.realm_module
 
 import dao.yuan.sen.gluttony.Gluttony
 import dao.yuan.sen.gluttony.annotation.PrimaryKey
-import dao.yuan.sen.gluttony.condition
-import io.realm.*
+import io.realm.RealmObject
+import io.realm.RealmQuery
+import io.realm.RealmResults
+import io.realm.Sort
 import kotlin.reflect.declaredMemberProperties
 
 /**
@@ -11,41 +13,28 @@ import kotlin.reflect.declaredMemberProperties
  */
 
 
-inline fun <reified T : RealmObject> T.findOneByKey(): T? {
+inline fun <reified T : RealmObject> T.realm_findOneByKey(propertyValue: Any): T? {
     val mClass = this.javaClass.kotlin
     val name = "${mClass.simpleName}"
     var propertyName: String? = null
-    var propertyValue: Any? = null
     mClass.declaredMemberProperties.forEach {
-        if (it.annotations.map {
-            it.annotationClass
-        }.contains(PrimaryKey::class)) {
+        if (it.annotations.map { it.annotationClass }.contains(PrimaryKey::class)) {
             propertyName = it.name
-            propertyValue = it.get(this)
         }
     }
     if (propertyName == null) {
         throw Exception("$name 类没有设置PrimaryKey")
     }
-    if (propertyValue == null) {
-        throw Exception("$name 类没有设置PrimaryKey的值")
-    }
 
-    RealmData().findAll {
-        dao.yuan.sen.gluttony.condition {
-            "age" equalTo 8
-            "time" lessThan 98
-        }
 
-    }
     return Gluttony.realm.where(this.javaClass)
             .apply {
                 when (propertyValue) {
-                    is String -> equalTo(propertyName, propertyValue as String)
-                    is Int -> equalTo(propertyName, propertyValue as Int)
-                    is Byte -> equalTo(propertyName, propertyValue as Byte)
-                    is Short -> equalTo(propertyName, propertyValue as Short)
-                    is Long -> equalTo(propertyName, propertyValue as Long)
+                    is String -> equalTo(propertyName, propertyValue)
+                    is Int -> equalTo(propertyName, propertyValue)
+                    is Byte -> equalTo(propertyName, propertyValue)
+                    is Short -> equalTo(propertyName, propertyValue)
+                    is Long -> equalTo(propertyName, propertyValue)
                     else -> throw Exception("$name 类设置了错误的PrimaryKey的类型")
                 }
             }
@@ -55,43 +44,61 @@ inline fun <reified T : RealmObject> T.findOneByKey(): T? {
 }
 
 
-inline fun <reified T : RealmObject> T.findAll(optionFunctor: RealmCondition.() -> Unit): RealmResults<T>? {
+inline fun <reified T : RealmObject> T.realm_findOne(optionFunctor: RealmFinder.() -> RealmFinder): T? {
 
-    return Gluttony.realm.where(this@findAll.javaClass)
+
+    val realmFinder = optionFunctor(RealmFinder())
+
+
+    return Gluttony.realm.where(this@realm_findOne.javaClass)
             .apply {
-                RealmCondition().apply {
-                    optionFunctor()
+                realmFinder.conditionFunctor?.invoke(this)
+            }.findFirst()
+}
 
-                }
+
+inline fun <reified T : RealmObject> T.realm_findAll(optionFunctor: RealmFinder.() -> Unit): RealmResults<T>? {
+
+
+    val realmFinder = RealmFinder().apply { optionFunctor() }
+
+
+    return Gluttony.realm.where(this@realm_findAll.javaClass)
+            .apply {
+                realmFinder.conditionFunctor?.invoke(this)
             }.findAll()
             .let {
                 it.apply {
-                    orderBy()
+                    realmFinder.orderFunctor?.invoke(this)
                 }
             }
 }
 
 
-inline fun RealmQuery<*>.condition(functor: () -> Array<RealmQuery<*>.() -> Unit>) {
-    functor().forEach { it() }
+class RealmFinder() {
+
+    var orderFunctor: (RealmResults<*>.() -> RealmResults<*>)? = null
+    var conditionFunctor: (RealmQuery<*>.() -> Unit)? = null
+
+
+    inline fun condition(crossinline functor: RealmCondition.() -> RealmCondition): RealmFinder {
+        conditionFunctor = {
+            RealmCondition().apply { functor().functorArray.forEach { it() } }
+
+        }
+        return this
+    }
+
+    inline fun <reified T : RealmObject> RealmResults<T>.orderBy(propertyName: String, orderMode: OrderMode): RealmResults<T> {
+        orderFunctor = {
+            sort(propertyName, when (orderMode) {
+                OrderMode.ASC -> Sort.ASCENDING
+                OrderMode.DESC -> Sort.DESCENDING
+            })
+        }
+        return this
+    }
 }
 
-inline fun <reified T : RealmObject> RealmResults<T>.orderBy(propertyName: String, orderMode: OrderMode): RealmResults<T>? {
-    return sort(propertyName, when (orderMode) {
-        OrderMode.ASC -> Sort.ASCENDING
-        OrderMode.DESC -> Sort.DESCENDING
-    })
-}
-
-open class RealmData : RealmObject()
 
 
-class RealmFinder(){
-
-
-
-}
-
-enum class OrderMode {
-    ASC, DESC
-}

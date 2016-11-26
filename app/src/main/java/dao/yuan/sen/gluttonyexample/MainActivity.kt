@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import dao.yuan.sen.gluttony.condition
 import dao.yuan.sen.gluttony.operator.*
+import dao.yuan.sen.gluttony.realm_module.*
 import org.jetbrains.anko.db.SqlOrderDirection
 
 class MainActivity : AppCompatActivity() {
@@ -85,18 +86,18 @@ class MainActivity : AppCompatActivity() {
         val user8 = UserData().findOneByKey(90)!!
         e { user8.name + ":" + user8.age } //green:82->red:99
 
-        //delete
+        //deleteAll
         var user9: UserData?
         user9 = UserData(90)//only need primary key
         user9.delete()
         user9 = UserData().findOneByKey(90)
         e { user9?.name ?: "no user" }//no user
 
-        UserData().deleteByKey(666)//delete sen
+        UserData().deleteByKey(666)//deleteAll sen
         val user10 = UserData().findOneByKey(666)
         e { user10?.name ?: "no user" }//no user
 
-        UserData().delete {
+        UserData().deleteAll {
             condition {
                 "isChild" equalsData true
             }
@@ -124,6 +125,45 @@ class MainActivity : AppCompatActivity() {
         }
 
         test()
+
+        testRealmCore()
+    }
+
+    private fun testRealmCore() {
+        //save
+        UserRealmData(130, "an", 7).realm_save()
+        UserRealmData(13, "yuan", 18).realm_save()
+        UserRealmData(444, "jake", 21).realm_save()
+
+
+        //find
+        val yuan = UserRealmData().realm_findOneByKey(13)
+        e("realm_gluttony", yuan.toString())//yuan
+
+        val userList = UserRealmData().realm_findAll {
+            condition {
+                "age" greaterThan 8
+            }
+        }
+        e("realm_gluttony", userList.toString())
+
+
+        //update
+        UserRealmData().realm_updateByKey(444) {
+            it.age += 1
+        }
+        e("realm_gluttony", UserRealmData().realm_findOneByKey(444).toString())
+
+        //delete
+
+        UserRealmData().realm_deleteAll {
+            condition {
+                "name" equalTo "jake"
+            }
+        }
+        e("realm_gluttony", UserRealmData().realm_findAll { }.toString())
+
+
     }
 
 
