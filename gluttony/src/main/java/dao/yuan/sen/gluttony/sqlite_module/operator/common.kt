@@ -1,4 +1,4 @@
-package dao.yuan.sen.gluttony.operator
+package dao.yuan.sen.gluttony.sqlite_module.operator
 
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException

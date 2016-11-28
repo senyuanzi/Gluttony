@@ -1,7 +1,7 @@
 package dao.yuan.sen.gluttony.realm_module
 
 import dao.yuan.sen.gluttony.Gluttony
-import dao.yuan.sen.gluttony.annotation.PrimaryKey
+import dao.yuan.sen.gluttony.sqlite_module.annotation.PrimaryKey
 import io.realm.RealmObject
 import io.realm.RealmQuery
 import io.realm.RealmResults

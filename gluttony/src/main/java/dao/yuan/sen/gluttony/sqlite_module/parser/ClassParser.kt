@@ -1,6 +1,6 @@
-package dao.yuan.sen.gluttony.parser
+package dao.yuan.sen.gluttony.sqlite_module.parser
 
-import dao.yuan.sen.gluttony.e
+import dao.yuan.sen.gluttony.sqlite_module.e
 import org.jetbrains.anko.AnkoException
 import org.jetbrains.anko.db.RowParser
 import java.lang.reflect.Modifier

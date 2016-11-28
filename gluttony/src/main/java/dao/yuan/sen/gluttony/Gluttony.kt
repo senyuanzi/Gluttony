@@ -1,6 +1,8 @@
 package dao.yuan.sen.gluttony
 
 import android.app.Application
+import dao.yuan.sen.gluttony.sqlite_module.GluttonyConfig
+import dao.yuan.sen.gluttony.sqlite_module.GluttonyDataBaseOpenHelper
 import io.realm.Realm
 import org.jetbrains.anko.runOnUiThread
 

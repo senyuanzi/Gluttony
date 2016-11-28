@@ -1,6 +1,6 @@
 package dao.yuan.sen.gluttonyexample
 
-import dao.yuan.sen.gluttony.annotation.PrimaryKey
+import dao.yuan.sen.gluttony.sqlite_module.annotation.PrimaryKey
 
 /**
  * Created by Administrator on 2016/11/19.

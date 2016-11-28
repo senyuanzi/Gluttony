@@ -1,4 +1,4 @@
-package dao.yuan.sen.gluttony
+package dao.yuan.sen.gluttony.sqlite_module
 
 import org.jetbrains.anko.AnkoException
 import org.jetbrains.anko.db.*

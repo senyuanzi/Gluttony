@@ -1,6 +1,7 @@
-package dao.yuan.sen.gluttony
+package dao.yuan.sen.gluttony.sqlite_module
 
 import android.util.Log
+import dao.yuan.sen.gluttony.Gluttony
 
 /**
  * Created by SenYuYuan on 2016/11/17.

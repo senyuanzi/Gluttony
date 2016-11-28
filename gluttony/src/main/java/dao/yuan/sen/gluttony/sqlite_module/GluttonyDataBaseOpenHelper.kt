@@ -1,8 +1,8 @@
-package dao.yuan.sen.gluttony
+package dao.yuan.sen.gluttony.sqlite_module
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import dao.yuan.sen.gluttony.GluttonyConfig
+import dao.yuan.sen.gluttony.sqlite_module.GluttonyConfig
 import org.jetbrains.anko.db.ManagedSQLiteOpenHelper
 
 /**

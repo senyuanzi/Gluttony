@@ -5,9 +5,10 @@ import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import dao.yuan.sen.gluttony.condition
+import dao.yuan.sen.gluttony.sqlite_module.condition
 import dao.yuan.sen.gluttony.operator.*
 import dao.yuan.sen.gluttony.realm_module.*
+import dao.yuan.sen.gluttony.sqlite_module.operator.*
 import org.jetbrains.anko.db.SqlOrderDirection
 
 class MainActivity : AppCompatActivity() {
