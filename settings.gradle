@@ -1,1 +1,1 @@
-include ':app',':gluttony'
+include ':app', ':gluttony', ':gluttony-realm'

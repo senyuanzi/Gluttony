@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/Gluttony.iml" filepath="$PROJECT_DIR$/Gluttony.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/gluttony/gluttony.iml" filepath="$PROJECT_DIR$/gluttony/gluttony.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gluttony-realm/gluttony-realm.iml" filepath="$PROJECT_DIR$/gluttony-realm/gluttony-realm.iml" />
     </modules>
   </component>
 </project>
