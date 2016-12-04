@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/gluttony" />
             <option value="$PROJECT_DIR$/gluttony-realm" />
+            <option value="$PROJECT_DIR$/magicbinding" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

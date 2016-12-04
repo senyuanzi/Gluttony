@@ -4,7 +4,6 @@ import io.realm.RealmObject
 import io.realm.RealmQuery
 import io.realm.RealmResults
 import io.realm.Sort
-import io.realm.annotations.PrimaryKey
 import kotlin.reflect.declaredMemberProperties
 
 /**
@@ -17,7 +16,7 @@ inline fun <reified T : RealmObject> T.findOneByKey(propertyValue: Any): T? {
     val name = "${mClass.simpleName}"
     var propertyName: String? = null
     mClass.declaredMemberProperties.forEach {
-        if (it.annotations.map { it.annotationClass }.contains(PrimaryKey::class)) {
+        if (it.annotations.map { it.annotationClass }.contains(GluttonyPrimaryKey::class)) {
             propertyName = it.name
         }
     }
@@ -38,16 +37,36 @@ inline fun <reified T : RealmObject> T.findOneByKey(propertyValue: Any): T? {
                 }
             }
             .findFirst()
-
-
 }
+//
+///**
+// * 对单例模式数据的支持:寻找
+// *
+// * 注意:必须有@Singleton注解的Int字段
+// * */
+//inline fun <reified T : RealmObject> T.findSingleton(): T? {
+//    val mClass = this.javaClass.kotlin
+//    val name = "${mClass.simpleName}"
+//    var propertyName: String? = null
+//    mClass.declaredMemberProperties.forEach {
+//        if (it.annotations.map { it.annotationClass }.contains(Singleton::class)) {
+//            propertyName = it.name
+//        }
+//    }
+//    if (propertyName == null) {
+//        throw Exception("$name 类没有设置 @Singleton 注解的 Int 字段")
+//    }
+//
+//    return Gluttony.realm.where(this.javaClass)
+//            .apply {
+//                equalTo(propertyName, 1)
+//            }
+//            .findFirst()
+//}
 
+inline fun <reified T : RealmObject> T.findOne(optionFunctor: RealmFinder.() -> Unit): T? {
 
-inline fun <reified T : RealmObject> T.findOne(optionFunctor: RealmFinder.() -> RealmFinder): T? {
-
-
-    val realmFinder = optionFunctor(RealmFinder())
-
+    val realmFinder = RealmFinder().apply { optionFunctor() }
 
     return Gluttony.realm.where(this@findOne.javaClass)
             .apply {
@@ -56,7 +75,7 @@ inline fun <reified T : RealmObject> T.findOne(optionFunctor: RealmFinder.() -> 
 }
 
 
-inline fun <reified T : RealmObject> T.findAll(optionFunctor: RealmFinder.() -> Unit): RealmResults<T>? {
+inline fun <reified T : RealmObject> T.findAll(optionFunctor: RealmFinder.() -> Unit): RealmResults<T> {
 
 
     val realmFinder = RealmFinder().apply { optionFunctor() }
