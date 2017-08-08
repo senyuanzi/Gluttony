@@ -1,7 +1,6 @@
 package sen.yuan.dao.magicbinding
 
 import android.app.Activity
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.util.Log
@@ -9,13 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.zchx.lb.magicbinding.annotation.*
 import io.realm.RealmObject
-import sen.yuan.dao.gluttony_realm.Gluttony
-import sen.yuan.magic.magic_core.xFunctor.timeStamp2Date_dd
-import sen.yuan.magic.magic_core.xFunctor.timeStamp2Date_mm
-import kotlin.properties.ReadWriteProperty
-import kotlin.reflect.KProperty
+import sen.yuan.dao.magicbinding.annotation.*
 import kotlin.reflect.declaredMemberProperties
 import kotlin.system.measureTimeMillis
 

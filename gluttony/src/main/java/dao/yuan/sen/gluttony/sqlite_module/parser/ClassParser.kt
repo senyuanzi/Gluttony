@@ -1,79 +1,54 @@
 package dao.yuan.sen.gluttony.sqlite_module.parser
 
-import dao.yuan.sen.gluttony.sqlite_module.e
-import org.jetbrains.anko.AnkoException
-import org.jetbrains.anko.db.RowParser
-import java.lang.reflect.Modifier
-import kotlin.reflect.primaryConstructor
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import dao.yuan.sen.gluttony.sqlite_module.annotation.Ignore
 
-/**
+import org.jetbrains.anko.db.MapRowParser
+import kotlin.reflect.full.declaredMemberProperties
+import kotlin.reflect.full.starProjectedType
+import kotlin.reflect.jvm.javaType
+
+/**数据反解析
  * Created by Administrator on 2016/11/19.
  */
 
 
-inline fun <reified T : Any> classParser(): RowParser<T> {
-    val clazz = T::class.java
-    val constructors = clazz.declaredConstructors.filter {
-        val types = it.parameterTypes
-        !it.isVarArgs && Modifier.isPublic(it.modifiers) &&
-                types != null && types.size > 0
-    }
-    if (constructors.isEmpty())
-        throw AnkoException(
-                "Can't initialize object parser for ${clazz.canonicalName}, no acceptable constructors found")
+inline fun <reified T : Any> classParser(): MapRowParser<T> {
 
-    val c = constructors[0]
-//    val c = clazz.kotlin.primaryConstructor
+    val clazz = T::class.java.kotlin
+    val properties = clazz.declaredMemberProperties
 
-    "".e("constructor", clazz.kotlin.primaryConstructor.toString())
+    val tablePairs = properties
+            .filter { !it.annotations.map { it.annotationClass }.contains(Ignore::class) }
+            .associate {
+                it.name to it.returnType
+            }.toList().toTypedArray()
 
+    return object : MapRowParser<T> {
+        override fun parseRow(columns: Map<String, Any?>): T {
 
-    for (type in c.parameterTypes) {
-        @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN")
-        val valid = when (type) {
-            Int::class.java, Long::class.java, java.lang.Long::class.java -> true
-            Double::class.java, java.lang.Double::class.java -> true
-            String::class.java, ByteArray::class.java -> true
-            Boolean::class.java -> true
-            else -> false
+            val newColumns = tablePairs
+                    .associate { (key, value) ->
+                        key to when (value.classifier) {
+                            Boolean::class.starProjectedType.classifier -> when (columns[key]) {
+                                "true" -> true
+                                "false" -> false
+                                else -> false
+                            }
+
+                            Long::class.starProjectedType.classifier,
+                            Int::class.starProjectedType.classifier,
+                            String::class.starProjectedType.classifier,
+                            Float::class.starProjectedType.classifier,
+                            Double::class.starProjectedType.classifier -> columns[key]
+
+                            else -> Gson().fromJson(columns[key].toString(), value.javaType)
+                        }
+                    }
+            val json = Gson().toJson(newColumns)
+            return Gson().fromJson(json, object : TypeToken<T>() {}.type)
         }
-        if (!valid)
-            throw AnkoException(
-                    "Invalid argument type ${type.canonicalName} in ${clazz.canonicalName} constructor." +
-                            "Supported types are: Long, Double, String, Array<Byte>.")
-    }
 
-    return object : RowParser<T> {
-        override fun parseRow(columns: Array<Any?>): T {
-
-
-
-            val intList: MutableList<Int> = mutableListOf()
-
-            c.parameterTypes.forEachIndexed { i, clazz ->
-                e("parameterType", clazz.toString())
-                if (clazz == Int::class.java) intList.add(i)
-            }
-
-            val newColumns = columns.mapIndexed { i, any ->
-                e("originColumns", any.toString())
-                if (i in intList) any.toString().toInt()
-                else when (any) {
-                    "true" -> true
-                    "false" -> false
-                    else -> any
-                }
-            }.toTypedArray()
-
-            newColumns.forEach {
-                e("newColumns", it.toString())
-            }
-
-
-//            val constructor = clazz.kotlin.primaryConstructor!!
-//            val maps = constructor.parameters.mapIndexed { i, kParameter -> kParameter to newColumns[i] }.toMap()
-//            return constructor.callBy(maps) as T
-            return c.newInstance(*newColumns) as T
-        }
     }
 }

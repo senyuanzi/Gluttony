@@ -10,7 +10,7 @@ ext {
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    buildToolsVersion "25.0.3"
 
     defaultConfig {
         minSdkVersion 19
@@ -27,9 +27,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-    }
 }
 
 dependencies {
@@ -37,30 +34,15 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
     testCompile 'junit:junit:4.12'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
-    compile 'org.jetbrains.anko:anko-sqlite:0.9'
+    compile 'org.jetbrains.anko:anko-sqlite:0.10.1'
     compile 'com.google.code.gson:gson:2.8.0'
 
 }
 
-buildscript {
-    ext.kotlin_version = '1.0.5-2'
-    repositories {
-        jcenter()
-        mavenCentral()
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "io.realm:realm-gradle-plugin:2.2.0"
-    }
-}
-repositories {
-    jcenter()
-    mavenCentral()
-}
 
 apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
 

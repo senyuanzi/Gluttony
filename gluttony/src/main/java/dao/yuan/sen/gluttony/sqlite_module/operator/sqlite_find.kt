@@ -6,7 +6,9 @@ import dao.yuan.sen.gluttony.sqlite_module.condition
 import dao.yuan.sen.gluttony.sqlite_module.parser.classParser
 import org.jetbrains.anko.db.SelectQueryBuilder
 import org.jetbrains.anko.db.select
-import kotlin.reflect.declaredMemberProperties
+import java.io.Serializable
+import java.lang.Exception
+import kotlin.reflect.full.declaredMemberProperties
 
 /**
  * Created by Administrator on 2016/11/28.
@@ -16,22 +18,22 @@ import kotlin.reflect.declaredMemberProperties
 /**
  * 根据 主键 查询数据
  * */
-inline fun <reified T : Any> T.findOneByKey(primaryKey: Any): T? {
+inline fun <reified T : Serializable> T.findOneByKey(primaryKey: Any): T? {
     val mClass = this.javaClass.kotlin
     val name = "${mClass.simpleName}"
+    val properties = mClass.declaredMemberProperties
     var propertyName: String? = null
-    mClass.declaredMemberProperties.forEach {
-        if (it.annotations.map {
-            it.annotationClass
-        }.contains(PrimaryKey::class)) propertyName = it.name
+
+    properties.forEach {
+        if (it.annotations.map { it.annotationClass }.contains(PrimaryKey::class)) propertyName = it.name
     }
     if (propertyName == null) throw Exception("$name 类型没有设置PrimaryKey")
     return Gluttony.database.use {
         tryDo {
             select(name).apply {
                 limit(1)
-                condition { propertyName!! equalsData primaryKey }
-            }.parseOpt(dao.yuan.sen.gluttony.sqlite_module.parser.classParser<T>())
+                condition { propertyName!! equalsData  primaryKey.toString() }
+            }.parseOpt(classParser<T>())
         }.let {
             when (it) {
                 null, "no such table" -> null
@@ -43,7 +45,7 @@ inline fun <reified T : Any> T.findOneByKey(primaryKey: Any): T? {
 }
 
 
-inline fun <reified T : Any> T.findOne(crossinline functor: SelectQueryBuilder.() -> Unit): T? {
+inline fun <reified T : Serializable> T.findOne(crossinline functor: SelectQueryBuilder.() -> Unit): T? {
     val name = "${this.javaClass.kotlin.simpleName}"
 
     return Gluttony.database.use {
@@ -63,8 +65,7 @@ inline fun <reified T : Any> T.findOne(crossinline functor: SelectQueryBuilder.(
     }
 }
 
-
-inline fun <reified T : Any> T.findAll(crossinline functor: SelectQueryBuilder.() -> Unit): List<T> {
+inline fun <reified T : Serializable> T.findAll(crossinline functor: SelectQueryBuilder.() -> Unit): List<T> {
     val name = "${this.javaClass.kotlin.simpleName}"
 
     return Gluttony.database.use {

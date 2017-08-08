@@ -5,9 +5,9 @@ Gluttony, a super convenient and simple library to using Android database
 
 饕餮，高效而简约地使用Android数据库
 
-Library is compatible with Kotlin 1.0.5-2 build.
+Library is compatible with Kotlin 1.1.3-2 build.
 
-饕餮 兼容 kotlin 1.0.5-2 版本（最新版）
+饕餮 兼容 kotlin 1.1.3-2 版本（最新版）
 
 
 ## Content · 目录

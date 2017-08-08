@@ -5,9 +5,12 @@ import dao.yuan.sen.gluttony.Gluttony
 import dao.yuan.sen.gluttony.sqlite_module.annotation.PrimaryKey
 import dao.yuan.sen.gluttony.sqlite_module.condition
 import dao.yuan.sen.gluttony.sqlite_module.e
+import io.realm.annotations.Ignore
 import org.jetbrains.anko.db.UpdateQueryBuilder
 import org.jetbrains.anko.db.update
+import java.io.Serializable
 import kotlin.reflect.declaredMemberProperties
+import kotlin.reflect.full.declaredMemberProperties
 
 /**
  * Created by Administrator on 2016/11/28.
@@ -16,12 +19,12 @@ import kotlin.reflect.declaredMemberProperties
 /**
  * 根据 实例 更新数据 ， 依靠实例的主键定位，如果数据库中不存在的话，将保存数据
  * @return 更新的数量位1 或 保存数据的id*/
-inline fun <reified T : Any> T.updateOrSave(): Long {
+inline fun <reified T : Serializable> T.updateOrSave(): Long {
     return if (update() == 0) save()
     else 1
 }
 
-inline fun <reified T : Any> T.updateByKey(primaryKey: Any, updateFunctor: (T) -> Unit): Int {
+inline fun <reified T : Serializable> T.updateByKey(primaryKey: Any, updateFunctor: (T) -> Unit): Int {
     val data: T? = this.findOneByKey(primaryKey) ?: return 0
     updateFunctor(data!!)
     return data.update()
@@ -30,7 +33,7 @@ inline fun <reified T : Any> T.updateByKey(primaryKey: Any, updateFunctor: (T) -
 /**
  * 根据 实例 更新数据 ， 依靠实例的主键定位
  * @return 更新的数量*/
-inline fun <reified T : Any> T.update(): Int {
+inline fun <reified T : Serializable> T.update(): Int {
     val mClass = this.javaClass.kotlin
     val properties = mClass.declaredMemberProperties
     var propertyValue: Any? = null
@@ -38,17 +41,19 @@ inline fun <reified T : Any> T.update(): Int {
         if (it.annotations.map { it.annotationClass }.contains(PrimaryKey::class)) propertyValue = it.get(this)
     }
     if (propertyValue == null) throw Exception("${mClass.simpleName} 类型没有设置PrimaryKey， 或是  实例的PrimaryKey属性不能为null")
-    val valuePairs = properties.associate {
-        e("reflect_values", "${it.name}:${it.get(this).toString()}")
-        it.name to it.get(this).let {
-            when (it) {
-                true -> "true"
-                false -> "false"
-                is String, is Int, is Float, is Double -> it
-                else -> Gson().toJson(it)
-            }
-        }
-    }.toList().toTypedArray()
+    val valuePairs = properties
+            .filter { !it.annotations.map { it.annotationClass }.contains(Ignore::class) }
+            .associate {
+                e("update", "${it.name}:${it.get(this).toString()}")
+                it.name to it.get(this).let {
+                    when (it) {
+                        true -> "true"
+                        false -> "false"
+                        is String, is Int, is Float, is Double -> it
+                        else -> Gson().toJson(it)
+                    }
+                }
+            }.toList().toTypedArray()
 
     return Gluttony.database.use {
         this@update.updateByKey(propertyValue!!, *valuePairs)
@@ -59,13 +64,13 @@ inline fun <reified T : Any> T.update(): Int {
 /**
  * 根据 主键 更新数据
  * @return 更新的数量*/
-inline fun <reified T : Any> T.updateByKey(primaryKey: Any, crossinline pairs: () -> Array<out Pair<String, Any>>): Int = updateByKey(primaryKey, *pairs())
+inline fun <reified T : Serializable> T.updateByKey(primaryKey: Any, crossinline pairs: () -> Array<out Pair<String, Any>>): Int = updateByKey(primaryKey, *pairs())
 
 
 /**
  * 根据 主键 更新数据
  * @return 更新的数量*/
-inline fun <reified T : Any> T.updateByKey(primaryKey: Any, vararg pairs: Pair<String, Any>): Int {
+inline fun <reified T : Serializable> T.updateByKey(primaryKey: Any, vararg pairs: Pair<String, Any>): Int {
     val mClass = this.javaClass.kotlin
     val name = "${mClass.simpleName}"
     var propertyName: String? = null
@@ -84,13 +89,13 @@ inline fun <reified T : Any> T.updateByKey(primaryKey: Any, vararg pairs: Pair<S
                 is Int -> it
                 else -> 0
             }
-        } as Int
+        }
     }
 }
 
 
 /**@return 更新的数量*/
-inline fun <reified T : Any> T.update(vararg pairs: Pair<String, Any>, crossinline condition: UpdateQueryBuilder.() -> Unit): Int {
+inline fun <reified T : Serializable> T.update(vararg pairs: Pair<String, Any>, crossinline condition: UpdateQueryBuilder.() -> Unit): Int {
     val name = "${this.javaClass.kotlin.simpleName}"
     return Gluttony.database.use {
         tryDo {

@@ -6,16 +6,16 @@ import dao.yuan.sen.gluttony.sqlite_module.annotation.PrimaryKey
 import dao.yuan.sen.gluttony.sqlite_module.condition
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.dropTable
-import kotlin.reflect.declaredMemberProperties
+import java.io.Serializable
+import kotlin.reflect.full.declaredMemberProperties
 
 /**
  * Created by Administrator on 2016/11/28.
  */
-
 /**
  * 根据 实例 删除数据 ， 依靠实例的主键定位
  * 返回值：删除的数量*/
-inline fun <reified T : Any> T.delete(): Int {
+inline fun <reified T : Serializable> T.delete(): Int {
     val mClass = this.javaClass.kotlin
     val properties = mClass.declaredMemberProperties
     var propertyValue: Any? = null
@@ -32,7 +32,7 @@ inline fun <reified T : Any> T.delete(): Int {
 /**
  * 清空 该类数据
  */
-inline fun <reified T : Any> T.clear() {
+inline fun <reified T : Serializable> T.clear() {
     val name = this.javaClass.kotlin.simpleName
     return Gluttony.database.use {
         dropTable(name!!, true)
@@ -40,11 +40,10 @@ inline fun <reified T : Any> T.clear() {
 }
 
 
-
 /**
  * 根据 主键 删除数据
  * 返回值：删除的数量*/
-inline fun <reified T : Any> T.deleteByKey(primaryKey: Any): Int {
+inline fun <reified T : Serializable> T.deleteByKey(primaryKey: Any): Int {
     val mClass = this.javaClass.kotlin
     val name = "${mClass.simpleName}"
     var propertyName: String? = null
@@ -67,7 +66,7 @@ inline fun <reified T : Any> T.deleteByKey(primaryKey: Any): Int {
 }
 
 /**返回值：删除的数量*/
-inline fun <reified T : Any> T.deleteAll(crossinline condition: () -> Condition): Int {
+inline fun <reified T : Serializable> T.deleteAll(crossinline condition: () -> Condition): Int {
     val name = "${this.javaClass.kotlin.simpleName}"
     return Gluttony.database.use {
         tryDo {
